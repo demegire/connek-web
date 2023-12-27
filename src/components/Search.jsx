@@ -12,8 +12,14 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
-import { Link } from 'react-router-dom';
+import { SearchedUserContext } from "../context/SearchedUserContext";
 
+import sampleImage from "../img/sampleImage.jpg";
+import sampleImage2 from "../img/sampleImage2.jpg";
+import sampleImage3 from "../img/sampleImage3.jpg";
+import nopp from "../img/noprofilepicture.png";
+
+const imageArr = [sampleImage, sampleImage2, sampleImage3,nopp];
 
 const Search = () => {
   const [username, setUsername] = useState("");
@@ -22,15 +28,21 @@ const Search = () => {
 
   const { currentUser } = useContext(AuthContext);
 
+  const { setSearchedUser } = useContext(SearchedUserContext);
+
   const handleSearch = async () => {
     const q = query(
       collection(db, "users"),
       where("displayName", "==", username)
           );
+    
 
     try {
       const querySnapshot = await getDocs(q);
+
       querySnapshot.forEach((doc) => {
+        
+        
         setUser(doc.data());
       });
     } catch (err) {
@@ -44,6 +56,13 @@ const Search = () => {
 
   const handleSelect = async () => {
     //check whether the group(chats in firestore) exists, if not create
+    user.photoURL ? 
+    setSearchedUser({
+      ...user,
+      responseRate: Math.floor(Math.random() * 100),
+      photoURL: imageArr[Math.floor(Math.random() * (imageArr.length-1))]
+    }):
+    setSearchedUser({...user,responseRate: Math.floor(Math.random() * 100), photoURL: imageArr[3]}) 
     const combinedId =
       currentUser.uid > user.uid
         ? currentUser.uid + user.uid
@@ -73,9 +92,9 @@ const Search = () => {
         });
       }
     } catch (err) {}
-    console.log(err)
+    console.log(err);
     setUser(null);
-    setUsername("")
+    setUsername("");
   };
   return (
     <div className="search">
