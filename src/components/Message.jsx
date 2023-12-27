@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 
-const Message = ({ message }) => {
+const Message = ({ message, isChatVisible }) => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
@@ -16,6 +16,7 @@ const Message = ({ message }) => {
     <div
       ref={ref}
       className={`message ${message.senderId === currentUser.uid && "owner"}`}
+      style={isChatVisible ? {padding:"10px 15px"} : {padding:0}}
     >
       <div className="messageContent">
         <p>{message.text}</p>

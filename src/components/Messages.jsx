@@ -4,10 +4,12 @@ import { ChatContext } from "../context/ChatContext";
 import { db } from "../firebase";
 import Message from "./Message";
 
-const Messages = () => {
+
+const Messages = ({isChatVisible}) => {
   const [messages, setMessages] = useState([]);
   const { data } = useContext(ChatContext);
-
+  
+ 
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
@@ -18,8 +20,9 @@ const Messages = () => {
     };
   }, [data.chatId]);
 
+
   return (
-    <div className="messages">
+    <div className="messages" style={isChatVisible ? {padding:"10px"} : {padding:"0"}}>
       {messages.map((m) => (
         <Message message={m} key={m.id} />
       ))}

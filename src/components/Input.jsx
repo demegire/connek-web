@@ -13,7 +13,7 @@ import { db } from "../firebase";
 import { v4 as uuid } from "uuid";
 import Send from "../img/send.png";
 
-const Input = () => {
+const Input = ({isChatVisible}) => {
   const [text, setText] = useState("");
 
   const { currentUser } = useContext(AuthContext);
@@ -82,22 +82,23 @@ const Input = () => {
   };
 
   return (
-    <div className="input">
+    <div className="input" style={isChatVisible ? {height:"50px",padding:"10px"} : {height:0,padding:"0"}}>
       <input
         type="text"
         placeholder="..."
         onChange={(e) => setText(e.target.value)}
         onKeyPress={handleKeyPress} // Add the key press event handler
         value={text}
+        style={isChatVisible ? {height:"auto"} : {height:0}}
       />
       {text && (
         <div className="cost-display">
           ${calculatedCost}
         </div>
       )}
-      <div className="send">
-        <button onClick={handleSend}>
-          <img src={Send} alt="Send" />
+      <div className="send" style={isChatVisible ? {height:"auto"} : {height:0}}>
+        <button onClick={handleSend} style={isChatVisible ? {padding:"10px 15px"} : {padding:0}}>
+          <img src={Send} alt="Send" style={isChatVisible ? {height:"36px"} : {height:0}}/>
         </button>
       </div>
     </div>

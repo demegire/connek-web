@@ -7,6 +7,7 @@ import "./style.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import ProfilesPage from "./pages/ProfilesPage";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -26,6 +27,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="/profile/:userId" element={<ProtectedRoute><UserProfile /></ProtectedRoute>}/>
+        <Route path="/:username" element={<ProfilesPage />} />
       </Routes>
     </BrowserRouter>
   );

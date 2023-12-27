@@ -15,7 +15,7 @@
 }
 
 .formContainer {
-  background-color: #000000 ;
+  background-color: #000000;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -49,6 +49,7 @@
 
       input {
         padding: 15px;
+        flex-grow: 1;
         border: none;
         width: 250px;
         border-bottom: 1px solid #000000;
@@ -58,7 +59,7 @@
       }
 
       button {
-        background-color: #000000 ;
+        background-color: #000000;
         color: white;
         padding: 10px;
         font-weight: bold;
@@ -95,6 +96,64 @@
   align-items: center;
   justify-content: center;
 
+  .chatProfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    max-width: 300px;
+    min-width: 300px;
+    margin: auto;
+    margin-top: 0.5rem;
+    gap: 10px;
+    border: 2px solid white;
+    padding: 16px 10px;
+    border-radius: 5%;
+
+    img {
+      width: 40%;
+      height:120px;
+      border-radius: 50%;
+    }
+
+    .chatProfileUsername,
+    .chatProfileResponseRate {
+      color: white	;
+      text-transform: capitalize;
+      text-align: center;
+    }
+    .chatProfileMessageCost{
+      color: #d2cece	;
+      text-transform: capitalize;
+      text-align: center;
+    }
+
+    .highlighted-green {
+      color: #25da1f;
+    }
+    .highlighted-red {
+      color: #b31b1b;
+    }
+    .highlighted-white{
+      color:white;
+    }
+    .startChat{
+      color:rgb(84, 84, 84);
+      font-weight: 700;
+      padding:4px 10px;
+      background-color:white;
+      text-decoration: none;
+      border-radius: 8px;
+      
+      margin: 8px auto;
+    }
+    .startChat:hover{
+      transform:scale(1.1);
+    }
+  }
+
+
   .container {
     border: 1px solid white;
     border-radius: 10px;
@@ -103,7 +162,7 @@
     display: flex;
     overflow: hidden;
     @include tablet {
-     width: 90%;
+      width: 90%;
     }
 
     .accountSettings {
@@ -113,7 +172,6 @@
       flex-direction: column;
       color: white;
       align-items: center;
-
 
       hr {
         border-top: 1px solid white;
@@ -158,16 +216,15 @@
           span {
             white-space: nowrap; /* Keep the 'USD per character' text on one line */
           }
-      }
-      
-    
+        }
+
         img {
           width: 100px;
           height: 100px;
           border-radius: 50%;
           object-fit: cover;
         }
-    
+
         h3 {
           font-size: 24px;
         }
@@ -199,9 +256,7 @@
           font-size: 14px;
           margin-top: 5px;
         }
-      
       }
-    
     }
 
     .sidebar {
@@ -210,7 +265,6 @@
       background-color: black;
       position: relative;
       border-right: 1px solid white;
-
 
       .navbar {
         display: flex;
@@ -248,7 +302,6 @@
         }
       }
       .search {
-
         .searchForm {
           padding: 10px;
 
@@ -286,6 +339,7 @@
           height: 50px;
           border-radius: 50%;
           object-fit: cover;
+
         }
 
         .userChatInfo {
@@ -301,29 +355,96 @@
       }
     }
     .chat {
-      flex: 2;
-      overflow: hidden; // Prevents the chat from expanding beyond its container
+      flex: 3;
+      overflow-y: hidden; // Prevents the chat from expanding beyond its container
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+
+      .messageAndInput{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        transition: height 1s ease-in-out;
+      }
+
+      .chatProfile {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: max-content;
+        min-width: 300px;
+        width:50%;
+        margin: 0.5rem auto;
+        gap: 4px;
+        border: 2px solid white;
+        padding: 8px;
+        border-radius: 5%;
+        height:auto;
+        
+
+        img {
+          width: 40%;
+          height:120px;
+          border-radius: 50%;
+        }
+
+        .chatProfileUsername,
+        .chatProfileResponseRate {
+          color: white	;
+          text-transform: capitalize;
+          text-align: center;
+        }
+        .chatProfileMessageCost{
+          color: #d2cece	;
+          text-transform: capitalize;
+          text-align: center;
+        }
+
+        .highlighted-green {
+          color: #25da1f;
+        }
+        .highlighted-red {
+          color: #b31b1b;
+        }
+        .highlighted-white{
+          color:white;
+        }
+        .startChat{
+          color:rgb(84, 84, 84);
+          font-weight: 700;
+          padding:4px 10px;
+          background-color:white;
+          text-decoration: none;
+          border-radius: 8px;
+          cursor: pointer;
+          margin: 8px auto;
+        }
+        .startChat:hover{
+          transform:scale(1.1);
+        }
+      }
 
       .messages {
         flex-grow: 1; // Added to allow messages to take up available space
         background-color: black;
         padding: 10px;
-        height: calc(100% - 160px);
+        height: calc(100% - 150px);
+
         overflow: scroll;
-      
+
         .message {
           display: flex;
           gap: 20px;
           margin-bottom: 20px;
-      
+
           .messageInfo {
             display: flex;
             flex-direction: column;
             color: gray;
             font-weight: 300;
-      
+
             img {
               width: 40px;
               height: 40px;
@@ -331,33 +452,32 @@
               object-fit: cover;
             }
           }
-      
+
           .messageContent {
             max-width: 80%; // Adjusted to allow messages to take up to 80% of the container width
             display: flex;
             flex-direction: column;
             gap: 10px;
-      
+
             p {
               background-color: white;
               padding: 10px 20px;
               border-radius: 0px 10px 10px 10px;
               word-wrap: break-word; // Ensures that the text breaks and wraps onto the next line
               border: 1px solid black; // Add this line to set the border color to black
-
             }
-      
+
             img {
               width: 50%;
             }
           }
-      
+
           &.owner {
             flex-direction: row-reverse;
-      
+
             .messageContent {
               align-items: flex-end;
-      
+
               p {
                 background-color: white;
                 color: black;
@@ -367,7 +487,6 @@
           }
         }
       }
-      
 
       .input {
         height: 50px;
@@ -376,7 +495,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        
+        transition: height 1s ease-in-out;
 
         input {
           width: 100%;
@@ -400,10 +519,11 @@
           display: flex;
           align-items: center;
           gap: 10px;
-
+          transition: height 1s ease-in-out;
           img {
             height: 36px;
             cursor: pointer;
+            
           }
 
           button {
@@ -411,6 +531,7 @@
             padding: 10px 15px;
             cursor: pointer;
             background-color: transparent;
+            transition: height 1s ease-in-out;
           }
         }
       }
