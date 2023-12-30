@@ -1,28 +1,37 @@
 import { doc, onSnapshot } from "firebase/firestore";
-import React, { useContext, useEffect, useState } from "react";
-import { ChatContext } from "../context/ChatContext";
+import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import Message from "./Message";
 
-const Messages = () => {
+const Messages = ({ chatData }) => {
   const [messages, setMessages] = useState([]);
-  const { data } = useContext(ChatContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
+    if (chatData.chatId === "null") return;
+    setIsLoading(true);
+
+    const unSub = onSnapshot(doc(db, "chats", chatData.chatId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
+      setIsLoading(false);
     });
 
     return () => {
       unSub();
     };
-  }, [data.chatId]);
+  }, [chatData.chatId]);
 
   return (
     <div className="messages">
-      {messages.map((m) => (
-        <Message message={m} key={m.id} />
-      ))}
+      {isLoading ? (
+        <p style={{ color: "white", textAlign: "center" }}>Loading...</p>
+      ) : (
+        <>
+          {messages.map((m) => (
+            <Message message={m} key={m.id} />
+          ))}
+        </>
+      )}
     </div>
   );
 };

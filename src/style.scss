@@ -220,6 +220,8 @@
         padding: 10px;
         justify-content: space-between;
         color: black;
+        border-right: 1px solid rgb(134, 150, 160);
+        margin-right: -1px;
 
         .logo {
           font-weight: bold;
@@ -300,7 +302,28 @@
         }
       }
     }
-    .chat {
+
+    .chatHeader {
+      background-color: white;
+      padding-left: 10px;
+      height: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      p {
+        font-weight: bold;
+      }
+
+      a {
+        font-size: 0.8125rem;
+        color: rgb(134, 150, 160);
+        text-decoration: none;
+      }
+    }
+
+
+    .chat, .userProfile {
       flex: 2;
       overflow: hidden; // Prevents the chat from expanding beyond its container
       display: flex;
@@ -414,6 +437,28 @@
           }
         }
       }
+    }
+
+    .userProfile {
+      align-items: center;
+      justify-content: center;
+      color: white;
+
+      img {
+        width: 128px;
+        height: 128px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+      }
+    }
+
+    .button {
+      color: white;
+      text-decoration: none;
+      background-color: #b31b1b;
+      padding: 10px 20px;
+      border-radius: 16px;
     }
   }
 }
