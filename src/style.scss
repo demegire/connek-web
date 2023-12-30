@@ -443,6 +443,14 @@
       align-items: center;
       justify-content: center;
       color: white;
+
+      img {
+        width: 128px;
+        height: 128px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+      }
     }
 
     .button {
