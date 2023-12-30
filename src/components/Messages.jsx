@@ -5,9 +5,15 @@ import Message from "./Message";
 
 const Messages = ({ chatData }) => {
   const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
+    if (chatData.chatId === "null") return;
+    setIsLoading(true);
+
     const unSub = onSnapshot(doc(db, "chats", chatData.chatId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
+      setIsLoading(false);
     });
 
     return () => {
@@ -17,9 +23,15 @@ const Messages = ({ chatData }) => {
 
   return (
     <div className="messages">
-      {messages.map((m) => (
-        <Message message={m} key={m.id} />
-      ))}
+      {isLoading ? (
+        <p style={{ color: "white", textAlign: "center" }}>Loading...</p>
+      ) : (
+        <>
+          {messages.map((m) => (
+            <Message message={m} key={m.id} />
+          ))}
+        </>
+      )}
     </div>
   );
 };
