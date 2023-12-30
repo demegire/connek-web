@@ -323,7 +323,7 @@
     }
 
 
-    .chat {
+    .chat, .userProfile {
       flex: 2;
       overflow: hidden; // Prevents the chat from expanding beyond its container
       display: flex;
