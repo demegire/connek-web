@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Messages from "./Messages";
 import Input from "./Input";
 import { ChatContext } from "../context/ChatContext";
+import { Link } from "react-router-dom";
 
 const Chat = () => {
   const { data } = useContext(ChatContext);
@@ -12,7 +13,7 @@ const Chat = () => {
       {isChatPartnerSelected && (
         <header className="chatHeader">
           <p>{data.user.displayName}</p>
-          <a href={`/${data.user.uid}`}>click here for user profile</a>
+          <Link to={`/${data.user.uid}`}>click here for user profile</Link>
         </header>
       )}
       <Messages chatData={data} />
