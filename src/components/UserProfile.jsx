@@ -49,7 +49,7 @@ const UserProfile = () => {
                 marginTop: "2rem",
               }}
               className="button"
-              to={`/chat/${user?.uid}`}
+              to={`/?chat=${user?.uid}`}
             >
               Chat with {user?.displayName}
             </Link>
