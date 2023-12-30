@@ -12,7 +12,7 @@ const Chat = () => {
       {isChatPartnerSelected && (
         <header className="chatHeader">
           <p>{data.user.displayName}</p>
-          <a href={`/profile/${data.user.uid}`}>click here for user profile</a>
+          <a href={`/${data.user.uid}`}>click here for user profile</a>
         </header>
       )}
       <Messages chatData={data} />
